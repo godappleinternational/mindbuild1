@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Mind Building Youth Care Foundation</title>
+<link rel="icon" href="f.png" type="image/png">
+<style>
+  /* Root colors */
+  :root {
+    --indigo: #4B0082;
+    --light-brown: #A0522D;
+    --white: #fff;
+    --black: #222;
+    --gray-light: #f9f7f3;
+    --gray-medium: #ddd;
+    --transition-speed: 0.3s;
+  }
+
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+    cursor: url('data:image/svg+xml;utf8,<svg fill="%234B0082" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L22 12 L2 22 Z"/></svg>') 4 0, auto;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    transition: background var(--transition-speed), color var(--transition-speed);
+  }
+  a {
+    color: var(--indigo);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+  }
+  a:hover {
+    color: var(--light-brown);
+    text-decoration: underline;
+  }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    background: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 8px rgba(160, 82, 45, 0.15);
+    z-index: 1000;
+  }
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--indigo);
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .logo .icon {
+    color: var(--light-brown);
+    font-size: 1.8rem;
+  }
+  nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  nav a {
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    color: var(--indigo);
+    transition: background-color 0.2s, color 0.2s;
+  }
+  nav a.active,
+  nav a:hover {
+    background-color: var(--light-brown);
+    color: var(--white);
+  }
+
+  /* Dark mode toggle button */
+  .toggle-btn {
+    background: none;
+    border: 2px solid var(--indigo);
+    color: var(--indigo);
+    border-radius: 6px;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .toggle-btn:hover {
+    background-color: var(--light-brown);
+    color: var(--white);
+    border-color: var(--light-brown);
+  }
+
+  /* Main container */
+  main {
+    max-width: 1100px;
+    margin: 3rem auto 4rem;
+    padding: 0 1rem;
+  }
+
+  /* Hero Section */
+  #home {
+    background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80') no-repeat center/cover;
+    border-radius: 15px;
+    padding: 6rem 2rem 4rem;
+    color: var(--white);
+    text-align: center;
+    box-shadow: inset 0 0 0 1000px rgba(160, 82, 45, 0.5);
+    position: relative;
+  }
+  #home h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  }
+  #home p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+  }
+  #home .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    background-color: var(--white);
+    color: var(--light-brown);
+    font-weight: 700;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(160, 82, 45, 0.4);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  }
+  .btn:hover {
+    background-color: var(--indigo);
+    color: var(--white);
+    box-shadow: 0 6px 18px rgba(75, 0, 130, 0.6);
+  }
+
+  /* Section Titles */
+  h2.section-title {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    color: var(--light-brown);
+    border-bottom: 3px solid var(--indigo);
+    padding-bottom: 0.3rem;
+    max-width: max-content;
+  }
+
+  /* About Section */
+  #about p,
+  #about ul {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto 1.5rem;
+  }
+  #about ul {
+    list-style: disc inside;
+    padding-left: 0;
+  }
+  #about ul li {
+    margin-bottom: 0.7rem;
+  }
+  .profile {
+    display: flex;
+    max-width: 900px;
+    margin: 2rem auto 0;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    background: var(--gray-light);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 14px rgba(160, 82, 45, 0.15);
+  }
+  .profile-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--indigo);
+    box-shadow: 0 0 12px var(--indigo);
+    flex-shrink: 0;
+  }
+  .profile-details h3 {
+    margin-top: 0;
+    margin-bottom: 0.3rem;
+    font-size: 1.6rem;
+    color: var(--indigo);
+  }
+  .profile-details p {
+    margin: 0.3rem 0;
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  /* Programs Section */
+  #programs .program-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .program-card {
+    background: var(--gray-light);
+    padding: 1.8rem 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(160, 82, 45, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .program-card h3 {
+    margin-top: 0;
+    color: var(--light-brown);
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+  }
+  .program-card p {
+    flex-grow: 1;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+  }
+  .program-card img {
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+
+  /* Contact Section */
+  #contact {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  #contact .contact-info p {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+  }
+  #contact .contact-info a {
+    font-weight: 600;
+  }
+  .contact-form {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .contact-form label {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: 2px solid var(--gray-medium);
+    font-size: 1rem;
+    resize: vertical;
+    background: var(--white);
+    color: var(--black);
+    transition: border-color 0.3s;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: var(--indigo);
+    outline: none;
+  }
+  .contact-form button {
+    background-color: var(--light-brown);
+    color: var(--white);
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+    box-shadow: 0 4px 14px rgba(160, 82, 45, 0.4);
+  }
+  .contact-form button:hover {
+    background-color: var(--indigo);
+  }
+
+  /* Donate Section */
+  #donate {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  #donate h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    color: var(--light-brown);
+  }
+  #donate p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  .donate-methods {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  .donate-card {
+    background: var(--gray-light);
+    padding: 1.8rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(160, 82, 45, 0.15);
+    width: 320px;
+  }
+  .donate-card h3 {
+    margin-top: 0;
+    color: var(--indigo);
+    margin-bottom: 1rem;
+  }
+  .donate-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+  }
+  #donate .btn-contact {
+    background-color: var(--light-brown);
+    color: var(--white);
+    font-weight: 700;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.15rem;
+    box-shadow: 0 4px 14px rgba(160, 82, 45, 0.4);
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+  }
+  #donate .btn-contact:hover {
+    background-color: var(--indigo);
+  }
+
+  /* Footer */
+  footer {
+    background: var(--white);
+    color: #666;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid var(--gray-medium);
+    font-size: 0.9rem;
+    user-select: none;
+  }
+
+  /* Social Floating Buttons */
+  .social-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1100;
+  }
+  .social-float a {
+    width: 56px;
+    height: 56px;
+    background-color: var(--indigo);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    box-shadow: 0 4px 12px rgba(75, 0, 130, 0.5);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    font-size: 28px;
+    line-height: 1;
+  }
+  .social-float a:hover {
+    background-color: var(--light-brown);
+    box-shadow: 0 6px 20px rgba(160, 82, 45, 0.7);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    #home h1 {
+      font-size: 2.2rem;
+    }
+    #home p {
+      font-size: 1.1rem;
+    }
+    .profile {
+      flex-direction: column;
+      text-align: center;
+    }
+    .profile-details h3 {
+      font-size: 1.4rem;
+    }
+    .program-card {
+      padding: 1.2rem 1rem;
+    }
+    .donate-methods {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    nav {
+      gap: 1rem;
+    }
+  }
+</style>
+<!-- Icons CDN -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  rel="stylesheet"
+/>
+</head>
+<body>
+<header>
+  <div class="logo" aria-label="The Mind Building Youth Care Foundation logo">
+    <span class="icon" aria-hidden="true">🧠</span>
+    The Mind Building <span style="color: var(--light-brown); margin-left: 0.3rem;">Youth Care Foundation</span>
+  </div>
+  <nav role="navigation" aria-label="Primary navigation">
+    <a href="#home" class="active" aria-current="page">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#programs">Our Programs</a>
+    <a href="#contact">Contact</a>
+    <a href="#donate">Donate</a>
+    <button class="toggle-btn" id="toggleMode" aria-label="Toggle dark mode">🌞</button>
+  </nav>
+</header>
+
+<main>
+  <!-- Home -->
+  <section id="home" tabindex="0" aria-label="Welcome section">
+    <h1>Welcome to The Mind Building Youth Care Foundation</h1>
+    <p>
+      Empowering the youth of Suleja, Abuja, Nigeria to build brighter futures through education, mentorship, and care.
+    </p>
+    <div class="btn-group">
+      <a href="#donate" class="btn" aria-label="Donate now button">Donate Now <i class="fa-solid fa-hand-holding-heart"></i></a>
+      <a href="#programs" class="btn" aria-label="View our programs button">Our Programs <i class="fa-solid fa-people-group"></i></a>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section id="about" tabindex="0" aria-label="About us section">
+    <h2 class="section-title">About Us</h2>
+    <p>
+      <strong>The Mind Building Youth Care Foundation</strong> is a non-profit organization located in Suleja, Abuja, Nigeria. Our mission is to nurture and empower young minds by providing support, education, and opportunities for youth to realize their full potential.
+    </p>
+    <ul>
+      <li>Founded by <strong>Mrs. Sarah Eseyi Oriowo</strong>, a passionate advocate for youth development.</li>
+      <li>Supported by her husband, <strong>Mr. Seun Oriowo</strong>.</li>
+      <li>Driven by the belief that every young person deserves a chance to succeed.</li>
+      <li>Committed to fostering a future where every youth is equipped with knowledge, skills, and confidence.</li>
+    </ul>
+    <div class="profile" aria-label="Founder profile">
+      <img
+        src="s.jpg"
+        alt="Portrait of Mrs. Sarah Eseyi Oriowo"
+        class="profile-img"
+        loading="lazy"
+      />
+      <div class="profile-details">
+        <h3>Mrs. Sarah Eseyi Oriowo</h3>
+        <p><strong>Chief Executive Officer (CEO) & Founder</strong><br />Married to Mr. Seun Oriowo</p>
+        <p>
+          Mrs. Sarah is dedicated to youth empowerment and community development. Her vision is to create a support system where young people can thrive, learn, and lead.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Programs -->
+  <section id="programs" tabindex="0" aria-label="Our programs section">
+    <h2 class="section-title">Our Programs</h2>
+    <div class="program-cards">
+      <article class="program-card" tabindex="0" aria-label="Mentorship Initiatives program">
+        <img src="https://womenfirstjobs.com/upload/blog/1700222448Blog-Picture-(500-x-350-px).png" alt="Mentorship" />
+        <h3>Mentorship Initiatives</h3>
+        <p>
+          Pairing youth with experienced mentors to guide their personal and professional growth. Our mentorship programs focus on leadership, career guidance, and life skills.
+        </p>
+      </article>
+       <article class="program-card" tabindex="0" aria-label="Mentorship Initiatives program">
+        <img src="https://madison365.com/wp-content/uploads/2016/01/africanamericancaregiver.jpg" alt="Mentorship" />
+        <h3>caregivers outreach</h3>
+        <p>
+          Pairing youth with experienced mentors to guide their personal and professional growth. Our mentorship programs focus on leadership, career guidance, and life skills.
+        </p>
+      </article>
+      <article class="program-card" tabindex="0" aria-label="Educational Support program">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80" alt="Educational Support" />
+        <h3>Educational Support</h3>
+        <p>
+          Providing scholarships, school supplies, and tutoring for underprivileged students. We believe education is the key to unlocking potential and breaking the cycle of poverty.
+        </p>
+      </article>
+      <article class="program-card" tabindex="0" aria-label="Community Outreach program">
+        <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=400&q=80" alt="Community Outreach" />
+        <h3>Community Outreach</h3>
+        <p>
+          Organizing workshops, seminars, and events that promote mental health, leadership, and essential life skills. We engage with the community to create positive change.
+        </p>
+      </article>
+       <article class="program-card" tabindex="0" aria-label="Mentorship Initiatives program">
+        <img src="data:image/jpeg;base64,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" alt="Widowers Visitation" />
+        <h3>Widowers Visitation</h3>
+        <p>
+          Pairing youth with experienced mentors to guide their personal and professional growth. Our mentorship programs focus on leadership, career guidance, and life skills.
+        </p>
+      </article>
+      <article class="program-card" tabindex="0" aria-label="Youth Empowerment Seminars program">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Youth Empowerment Seminars" />
+        <h3>Youth Empowerment Seminars</h3>
+        <p>
+          Regular seminars and bootcamps on entrepreneurship, digital literacy, and self-confidence, tailored to inspire and equip our youth for the future.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" tabindex="0" aria-label="Contact section">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="contact-info">
+      <p><strong>Location:</strong> Suleja, Abuja, Nigeria</p>
+      <p><strong>Phone:</strong> <a href="tel:+2348168795769" aria-label="Call +2348168795769">+2348168795769</a></p>
+      <p><strong>Email:</strong> <a href="mailto:themindbuildingfoundation@gmail.com" aria-label="Email themindbuildingfoundation@gmail.com">themindbuildingfoundation@gmail.com</a></p>
+    </div>
+    <form class="contact-form" aria-label="Contact form" onsubmit="event.preventDefault(); alert('Thank you for contacting us!'); this.reset();">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required aria-required="true" />
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required aria-required="true" />
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+      <button type="submit" class="btn" aria-label="Send message">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+  </section>
+
+  <!-- Donate -->
+  <section id="donate" tabindex="0" aria-label="Donate section">
+    <h2>Support Our Mission</h2>
+    <p>
+      Your donation helps us continue to empower and support the youth of Suleja and beyond. Every contribution makes a difference!
+    </p>
+    <div class="donate-methods" role="list">
+      <article class="donate-card" role="listitem" tabindex="0" aria-label="Bank transfer donation details">
+        <h3>Bank Transfer</h3>
+        <p>
+          <strong>Account Name:</strong> The Mind Building Youth Care Foundation<br />
+          <strong>Bank:</strong> Fidelity Bank Plc<br />
+          <strong>Account Number:</strong> 560137980
+        </p>
+      </article>
+      <article class="donate-card" role="listitem" tabindex="0" aria-label="Contact donation details">
+        <h3>Contact Us for Other Ways to Give</h3>
+        <p>
+          Email: <a href="mailto:themindbuildingfoundation@gmail.com">themindbuildingfoundation@gmail.com</a><br />
+          Phone: <a href="tel:+2348168795769">+2348168795769</a>
+        </p>
+      </article>
+    </div>
+    <a href="#contact" class="btn btn-contact" aria-label="Contact for partnership">Contact for Partnership</a>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  © 2025 The Mind Building Youth Care Foundation. All rights reserved.<br />
+  Suleja, Abuja, Nigeria | +2348168795769 | themindbuildingfoundation@gmail.com
+</footer>
+
+<!-- Social Floating Buttons -->
+<div class="social-float" aria-label="Social media links">
+  <a href="https://wa.me/+2348168795769" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+  <a href="https://www.instagram.com/themindbuildingfoundation/" target="_blank" rel="noopener" aria-label="Visit Instagram page">
+    <i class="fa-brands fa-instagram"></i>
+  </a>
+  <a href="https://www.facebook.com/TheMindBuildingForum" target="_blank" rel="noopener" aria-label="Visit Facebook page">
+    <i class="fa-brands fa-facebook-f"></i>
+  </a>
+</div>
+
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<script>
+  // Navigation active link highlight
+  const navLinks = document.querySelectorAll('nav a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      navLinks.forEach(l => l.classList.remove('active'));
+      e.target.classList.add('active');
+    });
+  });
+
+  // Dark/Light mode toggle
+  const toggleBtn = document.getElementById('toggleMode');
+  let darkMode = false;
+
+  function setMode(dark) {
+    if (dark) {
+      document.body.style.background = '#222';
+      document.body.style.color = '#ddd';
+      toggleBtn.textContent = '🌙';
+      darkMode = true;
+    } else {
+      document.body.style.background = '';
+      document.body.style.color = '';
+      toggleBtn.textContent = '🌞';
+      darkMode = false;
+    }
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    setMode(!darkMode);
+  });
+</script>
+</body>
+</html>
